@@ -6,11 +6,13 @@ from api import *
 from config import *
 from sanic_cors import CORS, cross_origin
 from sanic_openapi import openapi3_blueprint
+from cors import add_cors_headers
 
 
 app = Sanic(__name__)
 app.blueprint(api)
 app.blueprint(openapi3_blueprint)
+app.register_middleware(add_cors_headers, "response")
 CORS(app)
 
 
