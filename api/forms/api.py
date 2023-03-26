@@ -42,7 +42,7 @@ async def create(request):
 
 @api.route('/getAll', methods=['GET'])
 @protect
-async def get(request):
+async def getAll(request):
     user = request.ctx.user
     events = user._forms
     return json({'Forms': [event.to_json() for event in events]})
