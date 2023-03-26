@@ -27,10 +27,8 @@ async def create(request):
         data = request.json
         log.debug(data)
         user = request.ctx.user
-        if Form.get_by_ip(data['ip']):
-            return json({'message': 'IP is used'}, status=500)
-        event = FormModel(**data)
-        event = Form.create(**event.dict(), user_id=user.id)
+        event = FormModel(**data, user_id=user.id)
+        event = Form.create(**event.dict())
         return json({'message': 'Form created', 'form': event.to_json()})
     except IntegrityError as e:
         log.error(e)

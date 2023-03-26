@@ -53,5 +53,5 @@ class Form(Base):
 
 
 class FormModel(BaseModel):
-    id: int
+    user_id: int
     name: str

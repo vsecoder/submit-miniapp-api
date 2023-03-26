@@ -17,9 +17,8 @@ class User(Base):
 
     _forms = relationship('Form', backref='users')
 
-    def __init__(self, id, name, register_date, notifications, is_premium, premium_expire):
+    def __init__(self, id, register_date, notifications, is_premium, premium_expire):
         self.id = id
-        self.name = name
         self.register_date = register_date
         self.notifications = notifications
         self.is_premium = is_premium
@@ -30,7 +29,6 @@ class User(Base):
             raise Exception('User already exists')
         user = User(
             id=id,
-            name=name,
             register_date=datetime.datetime.now(),
             notifications=True,
             is_premium=False,
@@ -43,7 +41,6 @@ class User(Base):
     def to_json(self):
         return {
             'id': self.id,
-            'name': self.name,
             'register_date': str(self.register_date),
             'is_premium': self.is_premium,
             'premium_expire': str(self.premium_expire),
@@ -63,4 +60,3 @@ class User(Base):
 
 class UserModel(BaseModel):
     id: int
-    name: str
